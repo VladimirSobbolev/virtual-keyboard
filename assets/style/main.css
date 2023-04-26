@@ -2,4 +2,28 @@
   background-color: rgba(130, 149, 151, 0.5);
 }
 
+.key {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.key:active {
+  transform: translateX(5px);
+}
+.key__symbol {
+  font-size: 12px;
+  align-self: start;
+}
+.key__digit {
+  font-size: 18px;
+}
+
+.container {
+  display: flex;
+}
+
 /*# sourceMappingURL=main.css.map */

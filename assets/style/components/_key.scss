@@ -1,0 +1,24 @@
+.key {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  &:active {
+    transform: translateX(5px);
+  }
+
+  &__symbol {
+    font-size: 12px;
+    align-self: start;
+  }
+
+  &__digit {
+    font-size: 18px;
+  }
+
+
+}
