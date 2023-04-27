@@ -4,13 +4,13 @@
 //     console.log(event)
 // }
 //
-let digits = [];
-document.onkeyup = function (event) {
-
-    // console.log(event.key)
-    digits.push(event.key)
-    console.log(digits)
-}
+// let digits = [];
+// document.onkeyup = function (event) {
+//
+//     // console.log(event.key)
+//     digits.push(event.key)
+//     console.log(digits)
+// }
 
 // structure of page
 const Classes = {
@@ -57,7 +57,6 @@ function createNewElement(parent, style, tag = 'div') {
 const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
 // const DIGITS = new Array();
-console.log(CONTAINER)
 // const CONTAINER = createElement('div')
 console.log(BODY)
 
@@ -65,18 +64,21 @@ console.log(BODY)
 
 const DIGIT_BUTTONS = DIGIT_SECONDARY_KEY.map((el, index) => {
     let key = createNewElement(CONTAINER, 'KEY');
+    key.setAttribute('key-code', DIGIT_CODE[index]);
     let symbol = createNewElement(key, 'SYMBOL');
     symbol.append(el);
     let digit = createNewElement(key, 'DIGIT');
     digit.append(DIGIT_KEY[index])
     return key
 })
-// console.log(DIGIT_BUTTONS);
-// console.log(DIGIT_SECONDARY_KEY)
+
+
+// create ALPHABET keys
 
 const ALPHABET_KEYS = EN_UPPER_KEY.map((el, index) => {
 
     let key = createNewElement(CONTAINER, 'KEY');
+    key.setAttribute('key-code', KEY_CODE[index]);
     if (BIG_BUTTON.includes(KEY_CODE[index])) {
         key.classList.add(Classes['BIG_KEY'])
     }
@@ -105,5 +107,16 @@ const ALPHABET_KEYS = EN_UPPER_KEY.map((el, index) => {
 
 })
 
-// loggia
 
+
+// loggia
+document.onkeydown = function (event) {
+
+    // console.log(event.key)
+   let key = document.querySelector('.key[key-code = "'+event.keyCode+'"]')
+    console.log(key)
+    key.classList.add('active');
+}
+
+// let button = document.querySelector('.key[key-code=KeyA]')
+// console.log(button)
