@@ -4,19 +4,25 @@
   align-items: center;
   width: 50px;
   height: 45px;
-  //gap: 5px;
   margin-bottom: 10px;
   border: 1px solid black;
+  box-shadow: -2px 2px 5px grey;
   border-radius: 10px;
   background-color: darkgrey;
 
   &_big {
-    width: 80px;
+    width: 70px;
+  }
+
+  &_bigger {
+    width: 115px;
   }
 
 
   &:active {
-    transform: translateX(5px);
+    transform: translateX(-3px) translateY(3px);
+    box-shadow: 3px -3px 5px grey;
+
   }
 
   &__symbol {
@@ -31,13 +37,25 @@
   &__en {
     align-self: start;
     font-size: 14px;
-    color: red;
+    color: rgba(220, 17, 17, 0.8);
   }
 
   &__ru {
-    font-size: 10px;
+    font-size: 14px;
     color: green;
   }
 
+  &__arrow {
+    font-size: 24px;
+    color: black;
+  }
+
+  &__empty-en {
+    font-size: 14px;
+    color: rgba(220, 17, 17, 0.8);;
+  }
+  &__space {
+    width: 400px;
+  }
 
 }
