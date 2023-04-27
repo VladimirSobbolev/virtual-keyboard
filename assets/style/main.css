@@ -1,15 +1,20 @@
 .body {
-  background-color: rgba(130, 149, 151, 0.5);
+  background-color: lightgray;
 }
 
 .key {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 45px;
+  margin-bottom: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  background-color: darkgrey;
+}
+.key_big {
+  width: 80px;
 }
 .key:active {
   transform: translateX(5px);
@@ -21,9 +26,26 @@
 .key__digit {
   font-size: 18px;
 }
+.key__en {
+  align-self: start;
+  font-size: 14px;
+  color: red;
+}
+.key__ru {
+  font-size: 10px;
+  color: green;
+}
 
 .container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 850px;
+  gap: 5px;
+  padding: 10px;
+  border: 5px solid darkgrey;
+  border-radius: 10px;
+  background-color: aliceblue;
 }
 
 /*# sourceMappingURL=main.css.map */

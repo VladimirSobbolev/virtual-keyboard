@@ -2,10 +2,18 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 45px;
+  //gap: 5px;
+  margin-bottom: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  background-color: darkgrey;
+
+  &_big {
+    width: 80px;
+  }
+
 
   &:active {
     transform: translateX(5px);
@@ -18,6 +26,17 @@
 
   &__digit {
     font-size: 18px;
+  }
+
+  &__en {
+    align-self: start;
+    font-size: 14px;
+    color: red;
+  }
+
+  &__ru {
+    font-size: 10px;
+    color: green;
   }
 
 
