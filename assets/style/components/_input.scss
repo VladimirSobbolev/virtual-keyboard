@@ -1,0 +1,12 @@
+.display {
+  width: 850px;
+  height: 200px;
+  border: 2px solid darkgrey;
+  border-radius: 10px;
+  font-size: 30px;
+  resize: none;
+  &__wrapper {
+    width: 850px;
+    margin: 10px auto;
+  }
+}

@@ -14,7 +14,9 @@ const Classes = {
     'ARROW': 'key__arrow',
     'EMPTY_EN': 'key__empty-en',
     'SPACE': 'key__space',
-    'ACTIVE': 'active'
+    'ACTIVE': 'active',
+    'DISPLAY': 'display',
+    'DISPLAY__WRAP': 'display__wrapper'
 }
 
 // digits
@@ -28,12 +30,22 @@ const ARROWS = ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft'];
 const EMPTY_EN = ['MetaLeft', 'CapsLock', 'Delete', 'ControlLeft', 'MetaLeft', 'Escape', 'AltLeft', 'Space', 'AltRight', 'ControlRight']
 const BIG_BUTTON = ['Tab', 'Delete'];
 const BIGGER_BUTTON = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRight'];
+
+const BODY = document.querySelector('.' + Classes['BODY']);
+const CONTAINER = createNewElement(BODY, 'CONTAINER');
+const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY__WRAP');
+const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'textarea');
+// DISPLAY.name = 'display';
+// DISPLAY.rows = '5';
+
 // remove tab event
 window.onkeydown = evt => {
     if (evt.key === 'Tab' || evt.key === 'Alt') {
         evt.preventDefault();
     }
 }
+
+
 
 
 
@@ -44,8 +56,6 @@ function createNewElement(parent, style, tag = 'div') {
     return element
 }
 
-const BODY = document.querySelector('.' + Classes['BODY']);
-const CONTAINER = createNewElement(BODY, 'CONTAINER');
 // const DIGITS = new Array();
 // const CONTAINER = createElement('div')
 // console.log(BODY)
@@ -101,13 +111,11 @@ const ALPHABET_KEYS = EN_UPPER_KEY.map((el, index) => {
 
 // loggia
 document.onkeydown = function (event) {
-
    let key = document.querySelector('[myData="' + event.code +'"]')
     key.classList.add(Classes['ACTIVE'])
     console.log(key)
 }
 document.onkeyup = function (event) {
-
     let key = document.querySelector('[myData="' + event.code +'"]')
     key.classList.remove(Classes['ACTIVE'])
 }
