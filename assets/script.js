@@ -31,14 +31,7 @@ const BIGGER_BUTTON = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRigh
 const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
 const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY__WRAP');
-const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'textarea');
-
-// remove tab and alt  events
-window.onkeydown = evt => {
-  if (evt.key === 'Tab' || evt.key === 'Alt') {
-    evt.preventDefault();
-  }
-}
+const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
 
 function createNewElement(parent, style, tag = 'div') {
   const element = document.createElement(tag)
@@ -87,17 +80,34 @@ const ALPHABET_KEYS = EN_ALPHABET_KEYS.map((el, index) => {
     let ruKey = createNewElement(key, 'RU');
     ruKey.append(RU_ALPHABET_KEYS[index])
   }
-
+  return key
 })
 
 // loggia
+
+// remove tab and alt  events
+window.onkeydown = event => {
+  if (event.key === 'Tab' || event.key === 'Alt') {
+    event.preventDefault();
+  }
+}
+
 document.onkeydown = function (event) {
-  let key = document.querySelector('[myData="' + event.code + '"]')
-  key.classList.add(Classes['ACTIVE'])
-  console.log(key)
+  let key = document.querySelector('[myData="' + event.code + '"]');
+  key.classList.add(Classes['ACTIVE']);
 }
 document.onkeyup = function (event) {
   let key = document.querySelector('[myData="' + event.code + '"]')
   key.classList.remove(Classes['ACTIVE'])
 }
 
+// choose language
+const EN_BUTTONS = Array.from(document.querySelectorAll('.key__en'));
+
+function selectLanguage (key) {
+key.classList.toggle('key__selected')
+}
+
+
+EN_BUTTONS.forEach(el => selectLanguage(el))
+// console.log(EN_BUTTONS)

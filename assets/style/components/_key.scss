@@ -36,13 +36,20 @@
 
   &__en {
     align-self: start;
-    font-size: 14px;
-    color: rgba(220, 17, 17, 0.8);
+    margin-top: 2px;
+    font-size: 12px;
+    color: green;
+
   }
 
   &__ru {
-    font-size: 14px;
+    font-size: 12px;
     color: green;
+  }
+
+  &__selected {
+    font-size: 16px;
+    color: rgba(220, 17, 17, 0.8);
   }
 
   &__arrow {
