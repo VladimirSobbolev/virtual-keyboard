@@ -35,7 +35,6 @@ const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
 const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
 
 
-
 const SHIFT_LETTERS = {
   Backquote: ['~', '`', 'Ё', 'ё'],
   Digit1: ['!', '1', '!', '1'],
@@ -163,46 +162,63 @@ window.onkeydown = event => {
 }
 
 
-
 // choose language
-
+console.log(DIGIT_BUTTONS);
 const EN_BUTTONS = Array.from(document.querySelectorAll('.key__en'));
 const RU_BUTTONS = Array.from(document.querySelectorAll('.key__ru'));
 
 EN_BUTTONS.map(button => {
   button.classList.toggle(Classes['SELECTED-KEY'])
 })
+
 function changeButtonsLanguages() {
-  EN_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
-  RU_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
+  EN_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']));
+  RU_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']));
+  isEnglish ? isEnglish = false : isEnglish = true;
 }
 
 // changing display
 let isEnglish = true;
 let keyBoardState = isEnglish ? 1 : 3;
-// 0 is shift_en, 1 is en, 2 is shift_ru, 3 is ru
 
+// 0 is shift_en, 1 is en, 2 is shift_ru, 3 is ru
+function changeLanguage() {
+
+  let combo = DISPLAY.innerHTML.slice(-7);
+  if (combo === 'CtrlAlt' && 'lAltAlt') {
+    changeButtonsLanguages()
+  }
+}
 
 // key events
 document.onkeydown = function (event) {
-  if (event.code === 'ShiftLeft') {
-    keyBoardState = isEnglish ? 0 : 2;
-  }
+
+
   let key = document.querySelector(`[myData=${event.code}]`)
   key.classList.add('active');
+  console.log(keyBoardState, 'перед формированием буквы')
   let letter = SHIFT_LETTERS[event.code][keyBoardState];
+  console.log(letter)
   DISPLAY.innerHTML += letter;
+  changeLanguage();
+  if (event.code === 'ShiftLeft') {
+    keyBoardState = isEnglish ? 0 : 2;
+  } else {
+    keyBoardState = isEnglish ? 1 : 3;
+  }
+
 }
 
 document.onkeyup = function (event) {
   if (!(event.code === 'ShiftLeft')) {
-    keyBoardState = 1;
+
+    // keyBoardState = isEnglish ? 1 : 3;
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
     key = document.querySelector('[myData = ShiftLeft]')
     key.classList.remove('active');
   } else {
-    console.log(event.code, 'is shift')
+    // keyBoardState = isEnglish ? 0 : 2;
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
     key = document.querySelector('[myData = ShiftLeft]')
@@ -212,21 +228,24 @@ document.onkeyup = function (event) {
 
 // click events
 CONTAINER.onclick = function (event) {
+
   let key = event.target.closest('.key');
   if (key) {
-  let keyCode = key.getAttribute('mydata');
-  let shift = document.querySelector('[myData = ShiftLeft]')
-    let  letter
-  if (keyCode === 'ShiftLeft') {
-    keyBoardState = isEnglish ? 0 : 2;
-    shift.classList.add('active');
-    letter = SHIFT_LETTERS[keyCode][keyBoardState];
-  } else {
-    letter = SHIFT_LETTERS[keyCode][keyBoardState];
-    keyBoardState = isEnglish ? 1 : 3;
-    shift.classList.remove('active');
-  }
+    let keyCode = key.getAttribute('mydata');
+    let shift = document.querySelector('[myData = ShiftLeft]')
+    let letter = SHIFT_LETTERS[keyCode][keyBoardState];
+
     DISPLAY.innerHTML += letter;
+    changeLanguage();
+    if (keyCode === 'ShiftLeft') {
+      keyBoardState = isEnglish ? 0 : 2;
+      shift.classList.add('active');
+    } else {
+      keyBoardState = isEnglish ? 1 : 3;
+      shift.classList.remove('active');
+    }
   }
 }
+
+
 
