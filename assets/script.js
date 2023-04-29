@@ -31,8 +31,10 @@ const BIGGER_BUTTON = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRigh
 
 const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
-const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY__WRAP');
+const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
 const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
+
+
 
 const SHIFT_LETTERS = {
   Backquote: ['~', '`', 'Ё', 'ё'],
@@ -160,24 +162,48 @@ window.onkeydown = event => {
   }
 }
 
-document.onkeydown = function (event) {
-  let key = document.querySelector(`[myData=${event.code}]`);
-  key.classList.add(Classes['ACTIVE']);
-}
-document.onkeyup = function (event) {
-  let key = document.querySelector(`[myData=${event.code}]`)
-  key.classList.remove(Classes['ACTIVE'])
-}
+
 
 // choose language
+
 const EN_BUTTONS = Array.from(document.querySelectorAll('.key__en'));
 const RU_BUTTONS = Array.from(document.querySelectorAll('.key__ru'));
 
-function changeButtonsLanguages(key) {
+EN_BUTTONS.map(button => {
+  button.classList.toggle(Classes['SELECTED-KEY'])
+})
+function changeButtonsLanguages() {
   EN_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
   RU_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
 }
 
+// changing display
+let isEnglish = true;
+let keyBoardState = isEnglish ? 1 : 3;
+// 0 is shift_en, 1 is en, 2 is shift_ru, 3 is ru
 
-// EN_BUTTONS.forEach(el => selectLanguage(el))
-// console.log(EN_BUTTONS)
+document.onkeydown = function (event) {
+  if (event.code === 'ShiftLeft') {
+    keyBoardState = isEnglish ? 0 : 2;
+  }
+  let key = document.querySelector(`[myData=${event.code}]`)
+  key.classList.add('active');
+  let letter = SHIFT_LETTERS[event.code][keyBoardState];
+  DISPLAY.innerHTML += letter;
+}
+
+document.onkeyup = function (event) {
+  if (!(event.code === 'ShiftLeft')) {
+    keyBoardState = 1;
+    let key = document.querySelector(`[myData=${event.code}]`)
+    key.classList.remove('active');
+    key = document.querySelector('[myData = ShiftLeft]')
+    key.classList.remove('active');
+  } else {
+    console.log(event.code, 'is shift')
+    let key = document.querySelector(`[myData=${event.code}]`)
+    key.classList.remove('active');
+    key = document.querySelector('[myData = ShiftLeft]')
+    key.classList.add('active');
+  }
+}
