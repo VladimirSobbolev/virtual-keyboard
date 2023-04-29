@@ -93,11 +93,11 @@ window.onkeydown = event => {
 }
 
 document.onkeydown = function (event) {
-  let key = document.querySelector('[myData="' + event.code + '"]');
+  let key = document.querySelector(`[myData=${event.code}]`);
   key.classList.add(Classes['ACTIVE']);
 }
 document.onkeyup = function (event) {
-  let key = document.querySelector('[myData="' + event.code + '"]')
+  let key = document.querySelector(`[myData=${event.code}]`)
   key.classList.remove(Classes['ACTIVE'])
 }
 
