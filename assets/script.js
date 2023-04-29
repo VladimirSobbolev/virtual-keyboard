@@ -14,7 +14,8 @@ const Classes = {
   'SPACE': 'key__space',
   'ACTIVE': 'active',
   'DISPLAY': 'display',
-  'DISPLAY__WRAP': 'display__wrapper'
+  'DISPLAY-WRAP': 'display__wrapper',
+  'SELECTED-KEY': 'key__selected'
 }
 
 const DIGIT_CODE = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal'];
@@ -170,11 +171,13 @@ document.onkeyup = function (event) {
 
 // choose language
 const EN_BUTTONS = Array.from(document.querySelectorAll('.key__en'));
+const RU_BUTTONS = Array.from(document.querySelectorAll('.key__ru'));
 
-function selectLanguage (key) {
-key.classList.toggle('key__selected')
+function changeButtonsLanguages(key) {
+  EN_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
+  RU_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']))
 }
 
 
-EN_BUTTONS.forEach(el => selectLanguage(el))
+// EN_BUTTONS.forEach(el => selectLanguage(el))
 // console.log(EN_BUTTONS)
