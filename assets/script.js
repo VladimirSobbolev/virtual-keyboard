@@ -204,15 +204,13 @@ function changeLanguage() {
 // key events
 document.onkeydown = function (event) {
 
-
+  console.log(event.code)
   let key = document.querySelector(`[myData=${event.code}]`)
   key.classList.add('active');
-  console.log(keyBoardState, 'перед формированием буквы')
   let letter = SHIFT_LETTERS[event.code][keyBoardState];
-  console.log(letter)
   DISPLAY.innerHTML += letter;
   changeLanguage();
-  if (event.code === 'ShiftLeft') {
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
     keyBoardState = isEnglish ? 0 : 2;
   } else {
     keyBoardState = isEnglish ? 1 : 3;
@@ -221,18 +219,21 @@ document.onkeydown = function (event) {
 }
 
 document.onkeyup = function (event) {
-  if (!(event.code === 'ShiftLeft')) {
+  if (!(event.code === 'ShiftLeft' || event.code === 'ShiftRight')) {
 
-    // keyBoardState = isEnglish ? 1 : 3;
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
     key = document.querySelector('[myData = ShiftLeft]')
+    key.classList.remove('active');
+    key = document.querySelector('[myData = ShiftRight]')
     key.classList.remove('active');
   } else {
-    // keyBoardState = isEnglish ? 0 : 2;
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
+
     key = document.querySelector('[myData = ShiftLeft]')
+    key.classList.add('active');
+    key = document.querySelector('[myData = ShiftRight]')
     key.classList.add('active');
   }
 }
@@ -243,20 +244,28 @@ CONTAINER.onclick = function (event) {
   let key = event.target.closest('.key');
   if (key) {
     let keyCode = key.getAttribute('mydata');
-    let shift = document.querySelector('[myData = ShiftLeft]')
+    let shift = document.querySelector('[myData = ShiftLeft]');
+    let shiftR = document.querySelector('[myData = ShiftRight]');
     let letter = SHIFT_LETTERS[keyCode][keyBoardState];
 
     DISPLAY.innerHTML += letter;
     changeLanguage();
-    if (keyCode === 'ShiftLeft') {
+    console.log(keyCode)
+    if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
       keyBoardState = isEnglish ? 0 : 2;
+      shiftR.classList.add('active');
       shift.classList.add('active');
     } else {
       keyBoardState = isEnglish ? 1 : 3;
       shift.classList.remove('active');
+      shiftR.classList.remove('active');
     }
   }
 }
 
+// CAPSLOCK
+// function capslock(keyCode) {
+//   if (keyCode === CapsLock)
+// }
 
 
