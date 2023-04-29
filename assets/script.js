@@ -182,6 +182,8 @@ let isEnglish = true;
 let keyBoardState = isEnglish ? 1 : 3;
 // 0 is shift_en, 1 is en, 2 is shift_ru, 3 is ru
 
+
+// key events
 document.onkeydown = function (event) {
   if (event.code === 'ShiftLeft') {
     keyBoardState = isEnglish ? 0 : 2;
@@ -207,3 +209,24 @@ document.onkeyup = function (event) {
     key.classList.add('active');
   }
 }
+
+// click events
+CONTAINER.onclick = function (event) {
+  let key = event.target.closest('.key');
+  if (key) {
+  let keyCode = key.getAttribute('mydata');
+  let shift = document.querySelector('[myData = ShiftLeft]')
+    let  letter
+  if (keyCode === 'ShiftLeft') {
+    keyBoardState = isEnglish ? 0 : 2;
+    shift.classList.add('active');
+    letter = SHIFT_LETTERS[keyCode][keyBoardState];
+  } else {
+    letter = SHIFT_LETTERS[keyCode][keyBoardState];
+    keyBoardState = isEnglish ? 1 : 3;
+    shift.classList.remove('active');
+  }
+    DISPLAY.innerHTML += letter;
+  }
+}
+
