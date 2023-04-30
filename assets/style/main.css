@@ -1,3 +1,4 @@
+@import 'components/_active.css';
 .body {
   background-color: lightgray;
 }
@@ -73,11 +74,6 @@
 }
 .key__space {
   width: 400px;
-}
-
-.active {
-  transform: translateX(-3px) translateY(3px);
-  box-shadow: 3px -3px 5px grey;
 }
 
 .container {
