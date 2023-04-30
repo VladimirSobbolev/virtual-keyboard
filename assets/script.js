@@ -15,7 +15,8 @@ const Classes = {
   'ACTIVE': 'active',
   'DISPLAY': 'display',
   'DISPLAY-WRAP': 'display__wrapper',
-  'SELECTED-KEY': 'key__selected'
+  'SELECTED-KEY': 'key__selected',
+  'PIPELINE': 'pipeline'
 }
 
 const DIGIT_CODE = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal'];
@@ -33,9 +34,10 @@ const BIGGER_BUTTON = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRigh
 const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
 const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
-const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'pre');
+const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'textarea');
+DISPLAY.addEventListener('keydown', e => e.preventDefault());
 const COMBINATION = createNewElement(BODY, 'CONTAINER');
-COMBINATION.innerHTML = 'Клавиатура создана в операционной системе Windows. Для переключения языка комбинация: control + alt'
+COMBINATION.innerHTML = 'Клавиатура создана в операционной системе Windows. Для переключения языка комбинация: control + alt';
 
 const SHIFT_LETTERS = {
   Backquote: ['~', '`', 'Ё', 'ё'],
