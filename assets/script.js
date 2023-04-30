@@ -36,7 +36,6 @@ const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
 const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
 
 
-
 const SHIFT_LETTERS = {
   Backquote: ['~', '`', 'Ё', 'ё'],
   Digit1: ['!', '1', '!', '1'],
@@ -165,7 +164,8 @@ window.onkeydown = event => {
   }
 }
 
-
+const CAPS_LOCK = document.querySelector('[myData = CapsLock]');
+let isCaps = false;
 // choose language
 
 const EN_BUTTONS = Array.from(document.querySelectorAll('.key__en'));
@@ -204,23 +204,25 @@ function changeLanguage() {
 // key events
 document.onkeydown = function (event) {
 
-  console.log(event.code)
   let key = document.querySelector(`[myData=${event.code}]`)
   key.classList.add('active');
   let letter = SHIFT_LETTERS[event.code][keyBoardState];
   DISPLAY.innerHTML += letter;
+
   changeLanguage();
+
+  capslock(event.code);
+
   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-    keyBoardState = isEnglish ? 0 : 2;
+    isCaps ? keyBoardState = (isEnglish ? 1 : 3) : keyBoardState = (isEnglish ? 0 : 2);
   } else {
-    keyBoardState = isEnglish ? 1 : 3;
+    isCaps ? keyBoardState = (isEnglish ? 0 : 2) : keyBoardState = (isEnglish ? 1 : 3);
   }
 
 }
 
 document.onkeyup = function (event) {
   if (!(event.code === 'ShiftLeft' || event.code === 'ShiftRight')) {
-
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
     key = document.querySelector('[myData = ShiftLeft]')
@@ -230,11 +232,14 @@ document.onkeyup = function (event) {
   } else {
     let key = document.querySelector(`[myData=${event.code}]`)
     key.classList.remove('active');
-
     key = document.querySelector('[myData = ShiftLeft]')
     key.classList.add('active');
     key = document.querySelector('[myData = ShiftRight]')
     key.classList.add('active');
+  }
+
+  if (event.code === 'CapsLock') {
+    isCaps ? CAPS_LOCK.classList.add('active') : CAPS_LOCK.classList.remove('active');
   }
 }
 
@@ -247,25 +252,40 @@ CONTAINER.onclick = function (event) {
     let shift = document.querySelector('[myData = ShiftLeft]');
     let shiftR = document.querySelector('[myData = ShiftRight]');
     let letter = SHIFT_LETTERS[keyCode][keyBoardState];
-
     DISPLAY.innerHTML += letter;
     changeLanguage();
-    console.log(keyCode)
+    capslock(keyCode);
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
-      keyBoardState = isEnglish ? 0 : 2;
+      isCaps ? keyBoardState = (isEnglish ? 1 : 3) : keyBoardState = (isEnglish ? 0 : 2);
       shiftR.classList.add('active');
       shift.classList.add('active');
     } else {
-      keyBoardState = isEnglish ? 1 : 3;
+      isCaps ? keyBoardState = (isEnglish ? 0 : 2) : keyBoardState = (isEnglish ? 1 : 3);
       shift.classList.remove('active');
       shiftR.classList.remove('active');
+    }
+    if (event.code === 'CapsLock') {
+      isCaps ? CAPS_LOCK.classList.add('active') : CAPS_LOCK.classList.remove('active');
     }
   }
 }
 
 // CAPSLOCK
-// function capslock(keyCode) {
-//   if (keyCode === CapsLock)
-// }
+
+// CAPS_LOCK.classList.add('active')
+
+function capslock(keyCode) {
+  console.log(keyCode)
+  if (keyCode === 'CapsLock') {
+    !isCaps ? isCaps = true : isCaps = false;
+    if (isCaps) {
+      console.log('is in')
+      CAPS_LOCK.classList.add('active');
+    } else {
+      CAPS_LOCK.classList.remove('active');
+    }
+  }
+}
+
 
 
