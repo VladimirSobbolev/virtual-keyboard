@@ -222,6 +222,10 @@ document.onkeydown = function (event) {
   let key = document.querySelector(`[myData=${event.code}]`)
   key.classList.add('active');
   let letter = SHIFT_LETTERS[event.code][keyBoardState];
+  if (event.code === 'Backspace') {
+    DISPLAY.innerHTML = DISPLAY.innerHTML.slice(0, -1);
+    letter = '';
+  }
   DISPLAY.innerHTML += letter;
 
   changeLanguage();
@@ -266,7 +270,11 @@ CONTAINER.onclick = function (event) {
     let shift = document.querySelector('[myData = ShiftLeft]');
     let shiftR = document.querySelector('[myData = ShiftRight]');
     let letter = SHIFT_LETTERS[keyCode][keyBoardState];
-    DISPLAY.innerHTML += letter;
+    if (keyCode === 'Backspace') {
+      DISPLAY.innerHTML = DISPLAY.innerHTML.slice(0, -1);
+      letter = '';
+    }
+    DISPLAY.innerHTML += letter
     changeLanguage();
     capslock(keyCode)
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
