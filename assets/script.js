@@ -33,7 +33,7 @@ const BIGGER_BUTTON = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft', 'ShiftRigh
 const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
 const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
-const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
+const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'pre');
 const COMBINATION = createNewElement(BODY, 'CONTAINER');
 COMBINATION.innerHTML = 'Клавиатура создана в операционной системе Windows. Для переключения языка комбинация: control + alt'
 
@@ -52,7 +52,7 @@ const SHIFT_LETTERS = {
   Minus: ['_', '-', '_', '-'],
   Equal: ['+', '=', '+', '='],
   Backspace: ['&#x2190;', '&#x2190;', '&#x2190;', '&#x2190;'],
-  Tab: ['&#11134;', '&#11134;', '&#11134;', '&#11134;'],
+  Tab: ['   ', '  ', '  ', '  '],
   KeyQ: ['Q', 'q', 'Й', 'й'],
   KeyW: ['W', 'w', 'Ц', 'ц'],
   KeyE: ['E', 'e', 'У', 'у'],
@@ -79,7 +79,7 @@ const SHIFT_LETTERS = {
   KeyL: ['L', 'l', 'Д', 'д'],
   Semicolon: [':', ';', 'Ж', 'ж'],
   Quote: ['"', '\'', 'Э', 'э'],
-  Enter: ['&#8629;', '&#8629;', '&#8629;', '&#8629;'],
+  Enter: ['&#8629;\n', '&#8629;\n', '&#8629;\n', '&#8629;\n'],
   ShiftLeft: ['&#129093;', '&#129093;', '&#129093;', '&#129093;'],
   KeyZ: ['Z', 'z', 'Я', 'я'],
   KeyX: ['X', 'x', 'Ч', 'ч'],
