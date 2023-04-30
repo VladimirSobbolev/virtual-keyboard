@@ -102,7 +102,8 @@ const SHIFT_LETTERS = {
   ArrowRight: ['&#129034;', '&#129034;', '&#129034;', '&#129034;'],
   ControlRight: ['Ctrl', 'Ctrl', 'Ctrl', 'Ctrl']
 }
-
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
 function createNewElement(parent, style, tag = 'div') {
   const element = document.createElement(tag)
   element.classList.add(Classes[style])
@@ -111,20 +112,20 @@ function createNewElement(parent, style, tag = 'div') {
 }
 
 // create DIGITS keys
-const SYMBOLS = new Array();
-const DIGIT_BUTTONS = DIGIT_SHIFT_KEYS.map((el, index) => {
+const SYMBOLS = [];
+DIGIT_SHIFT_KEYS.map((el, index) => {
   let key = createNewElement(CONTAINER, 'KEY');
   key.setAttribute('myData', DIGIT_CODE[index]);
   let symbol = createNewElement(key, 'SYMBOL');
   symbol.append(el);
   SYMBOLS.push(symbol)
   let digit = createNewElement(key, 'DIGIT');
-  digit.append(DIGIT_KEYS[index])
+  digit.append(DIGIT_KEYS[index]);
   return key
 })
 
 // create ALPHABET keys
-const ALPHABET_KEYS = EN_ALPHABET_KEYS.map((el, index) => {
+EN_ALPHABET_KEYS.map((el, index) => {
 
   let key = createNewElement(CONTAINER, 'KEY');
   key.setAttribute('myData', ALPHABET_KEY_CODE[index]);
@@ -157,7 +158,7 @@ const ALPHABET_KEYS = EN_ALPHABET_KEYS.map((el, index) => {
 
 // loggia
 
-// remove tab and alt  events
+// remove tab and alt events
 window.onkeydown = event => {
   if (event.key === 'Tab' || event.key === 'Alt') {
     event.preventDefault();
@@ -189,7 +190,7 @@ function changeButtonsLanguages() {
 }
 
 // changing display
-let isEnglish = true;
+let isEnglish = false;
 let keyBoardState = isEnglish ? 1 : 3;
 
 // 0 is shift_en, 1 is en, 2 is shift_ru, 3 is ru
@@ -254,7 +255,6 @@ CONTAINER.onclick = function (event) {
     let letter = SHIFT_LETTERS[keyCode][keyBoardState];
     DISPLAY.innerHTML += letter;
     changeLanguage();
-    capslock(keyCode);
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
       isCaps ? keyBoardState = (isEnglish ? 1 : 3) : keyBoardState = (isEnglish ? 0 : 2);
       shiftR.classList.add('active');
@@ -275,7 +275,6 @@ CONTAINER.onclick = function (event) {
 // CAPS_LOCK.classList.add('active')
 
 function capslock(keyCode) {
-  console.log(keyCode)
   if (keyCode === 'CapsLock') {
     !isCaps ? isCaps = true : isCaps = false;
     if (isCaps) {
@@ -283,6 +282,24 @@ function capslock(keyCode) {
       CAPS_LOCK.classList.add('active');
     } else {
       CAPS_LOCK.classList.remove('active');
+    }
+  }
+}
+function setLocalStorage() {
+  localStorage.setItem('isEnglish', isEnglish);
+}
+
+function getLocalStorage() {
+  if(localStorage.getItem('isEnglish')) {
+  let localStorageValue = localStorage.getItem('isEnglish');
+   (localStorageValue === 'true') ? isEnglish = true : isEnglish = false;
+    keyBoardState = isEnglish ? 1 : 3;
+    if (isEnglish) {
+      SYMBOLS.map((el, index) => el.innerHTML = DIGIT_SHIFT_KEYS[index]);
+    } else {
+      SYMBOLS.map((el, index) => el.innerHTML = DIGIT_SHIFT_KEYS_RU[index]);
+      EN_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']));
+      RU_BUTTONS.map(button => button.classList.toggle(Classes['SELECTED-KEY']));
     }
   }
 }
