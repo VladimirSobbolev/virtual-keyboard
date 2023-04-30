@@ -255,6 +255,7 @@ CONTAINER.onclick = function (event) {
     let letter = SHIFT_LETTERS[keyCode][keyBoardState];
     DISPLAY.innerHTML += letter;
     changeLanguage();
+    capslock(keyCode)
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
       isCaps ? keyBoardState = (isEnglish ? 1 : 3) : keyBoardState = (isEnglish ? 0 : 2);
       shiftR.classList.add('active');
