@@ -156,6 +156,19 @@ EN_ALPHABET_KEYS.map((el, index) => {
   return key
 })
 
+const TAB = document.querySelector('[myData = Tab]');
+const ENTER = document.querySelector('[myData = Enter]');
+const SHIFT_L = document.querySelector('[myData = ShiftLeft]');
+const SHIFT_R = document.querySelector('[myData = ShiftRight]');
+const BACKSPACE = document.querySelector('[myData = Backspace]');
+
+const UNCHANGED_BUTTON = [TAB, ENTER, SHIFT_L, SHIFT_R, BACKSPACE];
+UNCHANGED_BUTTON.forEach(el => {
+  el.children[0].classList.remove(Classes['EN'])
+  el.children[0].classList.add(Classes['EMPTY_EN'])
+  el.children[1].classList.remove(Classes['RU'])
+  el.children[1].classList.add(Classes['EMPTY_EN'])
+})
 // loggia
 
 // remove tab and alt events
@@ -304,6 +317,3 @@ function getLocalStorage() {
     }
   }
 }
-
-
-
