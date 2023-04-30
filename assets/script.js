@@ -53,7 +53,7 @@ const SHIFT_LETTERS = {
   Backspace: ['&#x2190;', '&#x2190;', '&#x2190;', '&#x2190;'],
   Tab: ['&#11134;', '&#11134;', '&#11134;', '&#11134;'],
   KeyQ: ['Q', 'q', 'Й', 'й'],
-  KeyW: ['W', 'w', 'Ц', 'й'],
+  KeyW: ['W', 'w', 'Ц', 'ц'],
   KeyE: ['E', 'e', 'У', 'у'],
   KeyR: ['R', 'r', 'К', 'к'],
   KeyT: ['T', 't', 'Е', 'е'],
@@ -165,7 +165,7 @@ const BACKSPACE = document.querySelector('[myData = Backspace]');
 const UNCHANGED_BUTTON = [TAB, ENTER, SHIFT_L, SHIFT_R, BACKSPACE];
 UNCHANGED_BUTTON.forEach(el => {
   el.children[0].classList.remove(Classes['EN'])
-  el.children[0].classList.add(Classes['EMPTY_EN'])
+  el.children[0].classList.add(Classes['ARROW'])
   el.children[1].classList.remove(Classes['RU'])
   el.children[1].classList.add(Classes['EMPTY_EN'])
 })
