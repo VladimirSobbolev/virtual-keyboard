@@ -34,7 +34,8 @@ const BODY = document.querySelector('.' + Classes['BODY']);
 const CONTAINER = createNewElement(BODY, 'CONTAINER');
 const DISPLAY_WRAP = createNewElement(CONTAINER, 'DISPLAY-WRAP');
 const DISPLAY = createNewElement(DISPLAY_WRAP, 'DISPLAY', 'p');
-
+const COMBINATION = createNewElement(BODY, 'CONTAINER');
+COMBINATION.innerHTML = 'Клавиатура создана в операционной системе Windows. Для переключения языка комбинация: control + alt'
 
 const SHIFT_LETTERS = {
   Backquote: ['~', '`', 'Ё', 'ё'],
@@ -259,7 +260,6 @@ document.onkeyup = function (event) {
 
 // click events
 CONTAINER.onclick = function (event) {
-
   let key = event.target.closest('.key');
   if (key) {
     let keyCode = key.getAttribute('mydata');
