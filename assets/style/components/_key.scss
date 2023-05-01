@@ -1,0 +1,68 @@
+.key {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50px;
+  height: 45px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  box-shadow: -2px 2px 5px grey;
+  border-radius: 10px;
+  background-color: darkgrey;
+
+  &_big {
+    width: 70px;
+  }
+
+  &_bigger {
+    width: 115px;
+  }
+
+
+  &:active {
+    transform: translateX(-3px) translateY(3px);
+    box-shadow: 3px -3px 5px grey;
+
+  }
+
+  &__symbol {
+    font-size: 12px;
+    align-self: start;
+  }
+
+  &__digit {
+    font-size: 18px;
+  }
+
+  &__en {
+    align-self: start;
+    margin-top: 2px;
+    font-size: 12px;
+    color: green;
+
+  }
+
+  &__ru {
+    font-size: 12px;
+    color: green;
+  }
+
+  &__selected {
+    font-size: 16px;
+    color: rgba(220, 17, 17, 0.8);
+  }
+
+  &__arrow {
+    font-size: 24px;
+    color: black;
+  }
+
+  &__empty-en {
+    font-size: 14px;
+    color: rgba(220, 17, 17, 0.8);;
+  }
+  &__space {
+    width: 400px;
+  }
+
+}
